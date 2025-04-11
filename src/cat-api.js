@@ -14,6 +14,7 @@ export function fetchCatByBreed(breedId) {
         error.removeAttribute('hidden');
         return;
       }
+      error.setAttribute('hidden', true);
       return data;
     })
     .catch();
