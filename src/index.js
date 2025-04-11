@@ -16,6 +16,7 @@ function onSelect(evt) {
   loader.removeAttribute('hidden');
   fetchCatByBreed(idCat).then(data => {
     if (!data) {
+      loader.setAttribute('hidden', true);
       return;
     }
     // console.log(data[0].breeds[0].description);
