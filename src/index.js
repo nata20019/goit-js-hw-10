@@ -13,6 +13,7 @@ function onSelect(evt) {
   const idCat = evt.target.options[currentIndexOption].value;
   // console.log(idCat);
   catInfo.innerHTML = '';
+  select.setAttribute('hidden', true);
   loader.removeAttribute('hidden');
   fetchCatByBreed(idCat).then(data => {
     if (!data) {
@@ -20,11 +21,12 @@ function onSelect(evt) {
       return;
     }
     // console.log(data[0].breeds[0].description);
-    console.log(data);
+    // console.log(data);
     const { name, description, temperament } = data[0].breeds[0];
     const { url } = data[0];
-    console.log(name, '---', description, '---', temperament);
+    // console.log(name, '---', description, '---', temperament);
     loader.setAttribute('hidden', true);
+    select.removeAttribute('hidden');
     catInfo.innerHTML = createMarkup(name, description, temperament, url);
   });
 }
@@ -33,7 +35,7 @@ fetchBreeds();
 
 function createMarkup(name, description, temperament, url) {
   return `<div>
-       <img src="${url}" alt="" width="300" height="300">
+       <img src="${url}" alt="" width="400" height="300">
     <h2>${name}</h2>
     <p>${description}</p>
     <p>${temperament}</p>
