@@ -20,7 +20,8 @@
   "dependencies": {
     "@thatapicompany/thecatapi": "^1.0.2",
     "axios": "^1.8.4",
-    "modern-normalize": "^1.1.0"
+    "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.8"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",

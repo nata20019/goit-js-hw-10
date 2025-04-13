@@ -1,8 +1,10 @@
 import { fetchCatByBreed, fetchBreeds } from './cat-api';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 const select = document.querySelector('.breed-select');
 const catInfo = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
+const error = document.querySelector('.error');
 
 select.addEventListener('change', onSelect);
 
@@ -16,14 +18,15 @@ function onSelect(evt) {
   select.setAttribute('hidden', true);
   loader.removeAttribute('hidden');
   fetchCatByBreed(idCat).then(data => {
-    if (!data) {
+    if (data.data.length === 0) {
+      error.removeAttribute('hidden');
       loader.setAttribute('hidden', true);
       return;
     }
-    // console.log(data[0].breeds[0].description);
+    // console.log(data.data[0].breeds[0].description);
     // console.log(data);
-    const { name, description, temperament } = data[0].breeds[0];
-    const { url } = data[0];
+    const { name, description, temperament } = data.data[0].breeds[0];
+    const { url } = data.data[0];
     // console.log(name, '---', description, '---', temperament);
     loader.setAttribute('hidden', true);
     select.removeAttribute('hidden');

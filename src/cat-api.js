@@ -28,7 +28,7 @@ function addOptionsToSelect(breeds) {
 
 fetchCatByBreed('abys')
   .then(({ data }) => {
-    console.log(data);
+    // console.log(data);
     if (data.length === 0) {
       error.removeAttribute('hidden');
       select.removeAttribute('hidden');
@@ -41,7 +41,7 @@ fetchCatByBreed('abys')
 
 fetchBreeds()
   .then(({ data }) => {
-    console.log(data);
+    // console.log(data);
     if (data.length === 0) {
       alert(`Пород не знайдено.`);
     } else {
