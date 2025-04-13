@@ -26,9 +26,9 @@ function addOptionsToSelect(breeds) {
   });
 }
 
-fetchCatByBreed()
+fetchCatByBreed('abys')
   .then(({ data }) => {
-    // console.log(data);
+    console.log(data);
     if (data.length === 0) {
       error.removeAttribute('hidden');
       select.removeAttribute('hidden');
@@ -41,7 +41,7 @@ fetchCatByBreed()
 
 fetchBreeds()
   .then(({ data }) => {
-    // console.log(data);
+    console.log(data);
     if (data.length === 0) {
       alert(`Пород не знайдено.`);
     } else {
