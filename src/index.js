@@ -15,11 +15,12 @@ function onSelect(evt) {
   const idCat = evt.target.options[currentIndexOption].value;
   // console.log(idCat);
   catInfo.innerHTML = '';
-  select.setAttribute('hidden', true);
+  // select.setAttribute('hidden', true);
   loader.removeAttribute('hidden');
   fetchCatByBreed(idCat).then(data => {
     if (data.data.length === 0) {
       error.removeAttribute('hidden');
+      select.setAttribute('hidden', true);
       loader.setAttribute('hidden', true);
       return;
     }
@@ -35,6 +36,18 @@ function onSelect(evt) {
 }
 
 fetchBreeds();
+
+export function addOptionsToSelect(breeds) {
+  select.innerHTML = '';
+  breeds.forEach(breed => {
+    const option = document.createElement('option');
+    option.value = breed.id;
+    // console.log(option.value);
+    option.text = breed.name;
+    // console.log(option.text);
+    select.add(option);
+  });
+}
 
 function createMarkup(name, description, temperament, url) {
   return `<div>
