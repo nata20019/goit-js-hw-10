@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import { fetchCatByBreed, fetchBreeds } from './cat-api';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
@@ -7,7 +8,8 @@ const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
 select.addEventListener('change', onSelect);
-
+Loading.remove();
+Loading.dots();
 function onSelect(evt) {
   evt.preventDefault();
   // console.log(evt.target.options);
@@ -16,11 +18,13 @@ function onSelect(evt) {
   // console.log(idCat);
   catInfo.innerHTML = '';
   // select.setAttribute('hidden', true);
+  Loading.dots();
   loader.removeAttribute('hidden');
   fetchCatByBreed(idCat).then(data => {
     if (data.data.length === 0) {
       error.removeAttribute('hidden');
       select.setAttribute('hidden', true);
+      Loading.remove();
       loader.setAttribute('hidden', true);
       return;
     }
@@ -29,6 +33,7 @@ function onSelect(evt) {
     const { name, description, temperament } = data.data[0].breeds[0];
     const { url } = data.data[0];
     // console.log(name, '---', description, '---', temperament);
+    Loading.remove();
     loader.setAttribute('hidden', true);
     select.removeAttribute('hidden');
     catInfo.innerHTML = createMarkup(name, description, temperament, url);
@@ -79,6 +84,7 @@ fetchBreeds()
     } else {
       addOptionsToSelect(data);
       select.removeAttribute('hidden');
+      Loading.remove();
       loader.setAttribute('hidden', true);
     }
     return data;
