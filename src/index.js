@@ -37,7 +37,7 @@ function onSelect(evt) {
 
 fetchBreeds();
 
-export function addOptionsToSelect(breeds) {
+function addOptionsToSelect(breeds) {
   select.innerHTML = '';
   breeds.forEach(breed => {
     const option = document.createElement('option');
@@ -57,3 +57,33 @@ function createMarkup(name, description, temperament, url) {
     <p>${temperament}</p>
 </div>`;
 }
+
+fetchCatByBreed('abys');
+// .then(({ data }) => {
+//   // console.log(data);
+//   if (data.length === 0) {
+//     error.removeAttribute('hidden');
+//     // select.removeAttribute('hidden');
+//     return;
+//   }
+//   // error.setAttribute('hidden', true);
+//   return data;
+// })
+// .catch();
+
+fetchBreeds()
+  .then(({ data }) => {
+    console.log(data);
+    if (data.length === 0) {
+      alert(`Пород не знайдено.`);
+    } else {
+      addOptionsToSelect(data);
+      select.removeAttribute('hidden');
+      loader.setAttribute('hidden', true);
+    }
+    return data;
+  })
+  .catch(err => {
+    console.log('Помилка під час виконання fetchBreeds:', err);
+    // error.removeAttribute('hidden');
+  });
